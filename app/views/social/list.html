@@ -1,0 +1,24 @@
+{{if .list}}
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Address</th>
+      <th width="8%">Zip</th>
+      <th width="13%">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{range .list}}
+    <tr>
+      <td>{{.Name}}</td>
+      <td>{{.Url}}</td>
+    </tr>
+    {{end}}
+  </tbody>
+</table>
+{{else}}
+<p>
+  No more results
+</p>
+{{end}}

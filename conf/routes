@@ -3,19 +3,19 @@
 # ~~~~
 
 module:testrunner
+GET      /index.html                                              App.Index
+GET     /                                                                App.Index
+GET     /social/sociallist.html                             Social.ShowSocial
+#GET     /social/list.html                                      Social.List
 
-GET     /                                                                   App.Index
-#GET     /nfox/nfoxinfo.html                              Nfox.Nfoxinfo
-#GET    /partner/showpangtuo.html               Partner.Showpangtuo
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
-GET     /public/*filepath                       Static.Serve("public")
-GET     /assets/*filepath                       Static.Serve("public/assets")
-#GET     /nfox/*filepath                           Static.Serve("public/nfox")
-#GET     /partner/*filepath                     Static.Serve("public/partner")
+GET       /social/*filepath                     Static.Serve("public/social")
+GET       /assets/*filepath                     Static.Serve("public/assets")
+#GET     /partner/*filepath                   Static.Serve("public/partner")
 
 # Catch all
 *       /:controller/:action                    :controller.:action
