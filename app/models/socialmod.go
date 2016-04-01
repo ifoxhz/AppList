@@ -20,7 +20,7 @@ type SocialApp struct {
 type SocialMod struct {
       AppList  map[string] SocialApp
 }
-const  SocialQrLocation = "public/social/images"
+const  SocialQrLocation = "public/social/images/qrimg"
 
 
 
@@ -51,7 +51,7 @@ func  (s  *SocialMod) Init()   {
                     	revel.ERROR.Printf("Failed to create QRCODE  : %s %s", k,qrfn,  err)
                       continue
                 }
-                app.Qrcodeloc = "images/"  + oslib.JoinQRcodeName(v)
+                app.Qrcodeloc = "images/qrimg/"  + oslib.JoinQRcodeName(v)
            }
 
         s.AppList[k] = app
