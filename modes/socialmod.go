@@ -4,6 +4,7 @@ import (
 	//"fmt"
 	"github.com/ifoxhz/applist/app/models"
 	"github.com/ifoxhz/applist/app/routes"
+	"github.com/ifoxhz/applist/app/lib"
 	"strings"
   "os"
 )
@@ -27,16 +28,19 @@ func (s  *SocialMod) Init(Name string)  SocialApp {
      if  Applist == nil {
               for k, v := range SocailUrl {
                     SocailApp := {
-                         name:  k,
+                         name:    k,
                          AppUrl:  v,
               }
                AppList.append(k,v)
+							
+
+
          }
     }
 }
 
 func (s  *SocialMod) GetApp(Name string)  SocialApp {
-      if AppList[Name] ！= nil {
+      if AppList[Name] != nil {
           return AppList[Name]
       }
       return nil
