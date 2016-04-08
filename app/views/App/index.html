@@ -23,7 +23,7 @@
         <link rel="stylesheet" href="assets/css/style.css">
 
         <!-- google fonts -->
-        <link href='http://fonts.useso.com/css?family=Dosis:200,300,400,500|Lato:300,400,700,900,300italic,400italic,700italic,900italic|Raleway:400,200,300,500,100|Titillium+Web:400,200,300italic,300,200italic' rel='stylesheet' type='text/css'>
+        <!--<link href='http://fonts.useso.com/css?family=Dosis:200,300,400,500|Lato:300,400,700,900,300italic,400italic,700italic,900italic|Raleway:400,200,300,500,100|Titillium+Web:400,200,300italic,300,200italic' rel='stylesheet' type='text/css'>-->
 
         <script src="assets/js/modernizr.js"></script>
 
@@ -49,7 +49,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xs-6">
-                        <div class="logo"><a data-scroll href="#body" class="logo-text">Dark Joe</a></div>
+                          <div class="logo"><a data-scroll href="#body" class="logo-text">{{msg  . "website_title"}}</a></div>
                     </div>
                     <div class="col-xs-6">
                         <div class="nav">
@@ -57,8 +57,8 @@
                              <div class="dropdown-menu">
                                  <div class="arrow-up"></div>
                                  <ul>
-                                     <li><a data-scroll href="#body">Home <i class="pe-7s-home"></i></a><span class="menu-effect"></span></li>
-                                     <li><a data-scroll href="#services">Service <i class="pe-7s-config"></i></a><span class="menu-effect"></span></li>
+                                     <li><a data-scroll href="#body">主页 <i class="pe-7s-home"></i></a><span class="menu-effect"></span></li>
+                                     <li><a data-scroll href="#services">精选 <i class="pe-7s-config"></i></a><span class="menu-effect"></span></li>
                                      <li><a data-scroll href="#portfolio">Portfolio <i class="pe-7s-glasses"></i></a><span class="menu-effect"></span></li>
                                      <li><a data-scroll href="#testimonial">Testimonial <i class="pe-7s-comment"></i><span class="menu-effect"></span></a></li>
                                      <li><a data-scroll href="#contact">Contact <i class="pe-7s-help1"></i></a><span class="menu-effect"></span></li>
@@ -83,7 +83,7 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="services">
                             <div class="service-wrap">
-                                <i class="pe-7s-science pe-dj pe-va"></i>
+                                <i class="pe-7s-star pe-dj pe-va"></i>
                                 <h3>Creative Idea</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum, commodi.</p>
                             </div>
@@ -93,7 +93,7 @@
                     <div class="col-md-3 col-sm-6">
                         <div class="services">
                             <div class="service-wrap">
-                                <i class="pe-7s-monitor pe-dj pe-va"></i>
+                                <i class="pe-7s-medal pe-dj pe-va"></i>
                                 <h3>Responsive Design</h3>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laborum, commodi.</p>
                             </div>
@@ -233,14 +233,14 @@
             <div id="googleMap" style="width:100%;"></div>
             <div id="contact-area">
                 <div class="container">
-                    <h2 class="block_title">Hey !!!</h2>
+                    <h2 class="block_title">关于{{msg . "website_title"}}</h2>
                     <div class="row">
                         <div class="col-xs-12">
                         </div>
                         <div class="col-sm-6">
                             <div class="moreDetails">
-                                <h2 class="con-title">More About me</h2>
-                                <p> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatum animi repudiandae nihil aspernatur repellat temporibus doloremque sint ea laboriosam, excepturi iure inventore rerum voluptatibus, suscipit totam, sit necessitatibus. Rerum, blanditiis. </p>
+                                <strong >关于我们</strong>
+                                <p> {{msg . "website_title"}} 致力于ios App的推荐  </p>
                                 <ul class="address">
                                     <li><i class="pe-7s-map-marker"></i><span>1600 Pennsylvania Ave NW,<br>Washington, DC 20500,<br>United States</span></li>
                                     <li><i class="pe-7s-mail"></i><span>example@gmail.com</span></li>
@@ -292,10 +292,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <p class="copyright">© Copyright 2015 </p>
+                        <p class="copyright">© Copyright 2016 </p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="designed">Copyright &copy; 2015.Company name All rights reserved.More Templates <a href="http://www.cssmoban.com/" target="_blank" title="模板之家">模板之家</a> - Collect from <a href="http://www.cssmoban.com/" title="网页模板" target="_blank">网页模板</a></p>
+                        <p class="designed">Copyright &copy; 2016.{{msg  . "website_title"}} All rights reserved. </p>
                     </div>
                 </div>
             </div>
