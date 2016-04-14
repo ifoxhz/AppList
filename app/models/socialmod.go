@@ -52,7 +52,6 @@ func  (s  *SocialMod) Init()   {
     for k, v := range slist {
           app := v
           qrfn := SocialQrLocation + "/" + oslib.JoinQRcodeName(v.Url)
-           revel.INFO.Printf("%s",qrfn)
            if !oslib.CheckFileIsExist(qrfn) {
                 if _, err := qrcode.CreateQrcode(v.Url, revel.BasePath + "/" + qrfn) ; err != nil{
                     	revel.ERROR.Printf("Failed to create QRCODE  : %s %s", k,qrfn,  err)
@@ -86,7 +85,6 @@ func (s  *SocialMod) GetAllApp( )  (* []SocialApp, error) {
 
        var list []SocialApp
        for _, v := range keys {
-         	revel.INFO.Printf("app : %s", v)
           list =  append(list, s.AppList[v])
       }
       return &list, nil
