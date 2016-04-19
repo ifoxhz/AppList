@@ -3,11 +3,13 @@
 # ~~~~
 
 module:testrunner
-GET      /index.html                                              App.Index
-GET     /                                                                App.Index
+GET      /index.html                                             App.Index
+GET     /                                                                  App.Index
 GET     /social/sociallist.html                             Social.ShowSocial
-#GET     /social/list.html                                      Social.List
-GET     /getdog                                                     App.GetDog
+#GET     /social/list.html                                     Social.List
+GET     /getdog                                                      App.GetDog
+POST  /sendmessage                                           App.SendMessage
+GET    /waitinfo.html                                            App.Waitinfo
 
 
 # Ignore favicon requests

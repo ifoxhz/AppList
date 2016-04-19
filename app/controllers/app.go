@@ -16,6 +16,23 @@ func (c App) Index() revel.Result {
 	return c.Render()
 }
 
+func (c App) WaitInfo() revel.Result {
+
+	return c.Render()
+}
+
+func (c App) SendMessage(UserName string) revel.Result {
+	//name := c.Params.Get("UserName")
+	//email := c.Params.Get("UserEmail")
+  c.Flash.Success("Thanks")
+	//title := revel.Message(c.Request.Locale  , "website_title")
+	//revel.INFO.Printf("input: %s %s ", name,email)
+ // c.RenderText("Post success")
+	return c.Redirect("index.html")
+}
+
+
+
 func (c App) GetDog() revel.Result {
 
 	type ColorGroup struct {
