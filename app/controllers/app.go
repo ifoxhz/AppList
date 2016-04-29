@@ -1,15 +1,32 @@
 package controllers
 
 import "github.com/revel/revel"
-//import "encoding/json"
+import  "gopkg.in/redis.v3"
+//import "github.com/"
 //import "strings"
 
-var GID int = 1
+var GID int = -1
+var RedisOption =  redis.Options {
+    Addr: "127.0.0.1:6379",
+    Password:"",
+    DB: 0,
+}
+
+var Rdb  * redis.Client = nil
+
+
 type App struct {
 	*revel.Controller
 }
 
 func (c App) Index() revel.Result {
+     if (Rdb == nil){
+			   Rdb =  redis.NewClient(&RedisOption)
+		}
+
+   if err := Rdb.Incr("IOTHILL.PAGEVIEW").Err(); err != nil {
+    revel.INFO.Printf("failed to conneted redis ", err)
+   }
 	//local := c.RenderArgs["controllerCurrentLocale"]
 	//title := revel.Message(c.Request.Locale  , "website_title")
 	//revel.INFO.Printf("local %s  : %s  ", revel.MessageLanguages(), title)

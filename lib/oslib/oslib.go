@@ -15,7 +15,7 @@ func CheckFileIsExist(filename string) (bool) {
       return exist
 }
 
-func JoinQRcodeName(url string) string{
-      md := fmt.Sprintf("%x" , md5.Sum( []byte(url) ))
+func JoinQRcodeName(name string) string{
+      md := fmt.Sprintf("%x" , md5.Sum( []byte(name) ))
       return  md  + ".png"
 }
