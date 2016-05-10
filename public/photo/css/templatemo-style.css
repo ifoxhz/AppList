@@ -486,9 +486,9 @@ h5 {
     height: 100%;
 }
 .post-masonry .post-thumb .post-hover h4 {
-    font-size: 16px;
+    font-size: 12px;
     font-family: 'robotoregular';
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .post-masonry .post-thumb .post-hover a {

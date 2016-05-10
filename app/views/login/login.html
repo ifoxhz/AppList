@@ -1,0 +1,42 @@
+{{append . "moreStyles" "css/common.css"}}
+
+{{set . "title" "Login"}}
+{{template "header.html" .}}
+  <meta charset="utf-8">
+<header class="hero-unit">
+  <div class="container">
+    <div class="row">
+      <div class="hero-text">
+        {{if .email}}
+          Hello {{.email}} <a href=" {{url   "Login.Signout" }} " id="logout">Signout</a>
+        {{else}}
+          Signin with your email
+          <div class="col-sm-6">
+              <h2 class="con-title">login</h2>
+              <form  id = "sendmessage" role="form" method="post" action=" {{url   "Login.Signin" }} ">
+                <div class="form-group">
+                  <input type="email"  name="UserEmail" class="form-control" id="your_email" placeholder="Enter your email">
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="UserName"  id="user_name" placeholder="Enter your name">
+                </div>
+
+                <button type="submit" class="btn medium" form="sendmessage">Signin</button>
+              </form>
+          </div>
+
+        {{end}}
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+  <div class="row">
+    <div class="span6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+
+{{template "footer.html" .}}

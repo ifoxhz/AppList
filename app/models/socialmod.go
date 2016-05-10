@@ -1,12 +1,12 @@
-package socailorm
+package model
 import (
 "sort"
  "errors"
  //"os"
  //"crypto/md5"
  "github.com/revel/revel"
- "github.com/ifoxhz/applist/lib/oslib"
- "github.com/ifoxhz/applist/lib/qrcode"
+ "github.com/applist/lib/oslib"
+ "github.com/applist/lib/qrcode"
 )
 
 type SocialApp struct {

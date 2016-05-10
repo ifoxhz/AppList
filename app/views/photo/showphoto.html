@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -6,7 +7,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>社交App</title>
+        <title>摄影/摄像App</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -32,7 +33,7 @@
         <div class="site-top">
             <div class="site-header clearfix">
                 <div class="container">
-                    <a href="../index.html" class="site-brand pull-left">主页 </a>
+                    <a href="{{.indexpage}}" class="site-brand pull-left">主页 </a>
                     <div class="social-icons pull-right">
                         <ul>
                             <!--<li><a href="#" class="fa fa-twitter"></a></li>
@@ -47,8 +48,8 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-offset-2 col-md-8 text-center">
-                            <h2> <span class="blue">社交App推荐</span></h2>
-                            <p>精选的社交类App</p>
+                            <h2> <span class="blue">摄影/摄像App推荐</span></h2>
+                            <p>精选的摄影/摄像App推荐</p>
                         </div>
                     </div>
                     </div>
@@ -60,7 +61,6 @@
         <div class="main-posts">
             <div class="container">
                 <div class="row">
-
                     <div class="blog-masonry masonry-true">
                        {{range .list}}
                         <div class="post-masonry col-md-3  col-sm-6 col-xs-12 ">
@@ -74,7 +74,7 @@
                                 <div class="post-hover  text-center">
                                   <!--<img src="images/3.jpg" alt="">-->
                                 <div class="inside">
-                                      <img src='{{.Qrcodeloc}}' rel='nofollow' alt='qr code'>
+                                      <img src='{{.QrcodeLoc}}' rel='nofollow' alt='qr code'>
                                           <h4><a href="{{.Url}}">App Store</a></h4>
                                           <h4>微信扫一扫可从苹果App store下载</h4>
                                       <!--<i> <img src="images/3.jpg" alt=""> </i>-->
@@ -109,7 +109,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <p class="copyright-text">Copyright &copy; 2016 iothill
+                        <p class="copyright-text">Copyright &copy; 2016 IotHill
                     	|  <a href="http://www.iothill.com" target="_blank" title="{{msg . "website_title"}}">{{msg . "website_title"}}</a>
                     </div>
                 </div>

@@ -1,6 +1,10 @@
 package app
 
 import "github.com/revel/revel"
+import (
+	  CTL "github.com/applist/app/controllers"
+		"github.com/applist/app/routes"
+)
 
 func init() {
 	// Filters is the default set of global filters.
@@ -35,4 +39,15 @@ var HeaderFilter = func(c *revel.Controller, fc []revel.Filter) {
 	c.Response.Out.Header().Add("X-Content-Type-Options", "nosniff")
 
 	fc[0](c, fc[1:]) // Execute the next filter stage.
+	revel.InterceptFunc(checkAuthentication, revel.BEFORE, &CTL.Sepia{})
+}
+
+
+func checkAuthentication(c *revel.Controller) revel.Result {
+	if  va, ok := c.Session["access"]; ok {
+		   revel.INFO.Print("%s", va)
+       return nil
+	}else{
+		  return c.Redirect(routes.Login.Login())
+	}
 }

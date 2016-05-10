@@ -1,4 +1,27 @@
-package appModel
+package appmodel
+import (
+  //"strings"
+)
+
+type Category int
+const  (
+    social Category = iota +100
+    photo
+)
+
+var ModeKeyMap = map[Category] string {
+           social:  "APP:SOCIAL",
+           photo:  "APP:PHOTO",
+}
+var  IconLoaction = map[Category] string {
+           social:  "public/social/images/icon/",
+           photo:  "public/photo/images/icon/",
+}
+
+var  QrimageLoaction = map[Category] string {
+           social:  "public/social/images/qrimg/",
+           photo:  "public/photo/images/qrimg/",
+}
 
 type AppModel struct {
   Id         string
@@ -7,5 +30,9 @@ type AppModel struct {
 	Icon      string
 	QrcodeLoc string
   Tag           string
-  Category   int
+  Category   Category
+}
+
+func  GetIconLocation(cat Category) string{
+        return  IconLoaction[cat]
 }

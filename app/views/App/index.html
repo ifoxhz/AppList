@@ -6,7 +6,7 @@
 
 <html class="no-js"> <!--<![endif]-->
     <head>
-        <title>IotHao</title>
+        <title>{{msg . "website_title"}}</title>
 
         <!-- meta -->
         <meta charset="utf-8">
@@ -139,7 +139,7 @@
                             <img src="assets/images/portfolio2.jpg" alt="img01">
                             <figcaption>
                                 <h3>拍照</h3>
-                                <a href="waitinfo.html" class="button" >浏览</a>
+                                <a href="photo/photolist.html" class="button" >浏览</a>
                             </figcaption>
                         </figure>
                     </div>
@@ -200,7 +200,7 @@
                     <div id="testimonial-container" class="col-xs-12">
                         <div class="testimonila-block">
                             <img src="assets/images/designer.jpg" alt="clients" class="selfshot">
-                            <p>IotHao的伙伴们来自IT 和 文化创意行业，致力于更简单的使用手机,我们将持续更新中......</p>
+                            <p>{{msg . "website_title"}}的伙伴们来自IT 和 文化创意行业，致力于更简单的使用手机,我们将持续更新中......</p>
                             <strong>Elise</strong>
                             <br>
                             <small>创意设计</small>
@@ -240,14 +240,14 @@
                                 <p> {{msg . "website_title"}} 致力于ios App的推荐  </p>
                                 <ul class="address">
                                     <li><i class="pe-7s-map-marker"></i><span>杭州源越大厦</span></li>
-                                    <li><i class="pe-7s-mail"></i><span>business@iothao.com</span></li>
+                                    <li><i class="pe-7s-mail"></i><span>business@iothill.com</span></li>
                                     <li><i class="pe-7s-phone"></i><span></span></li>
-                                    <li><i class="pe-7s-global"></i><span><a href="#">www.iothao.com</a></span></li>
+                                    <li><i class="pe-7s-global"></i><span><a href="#">www.iothill.com</a></span></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-sm-6">
-                            <h2 class="con-title">短消息 IotHao team</h2>
+                            <h2 class="con-title">短消息 {{msg . "website_title"}} team</h2>
                             <form  id = "sendmessage" role="form" method="post" action=" {{url   "App.SendMessage" }} ">
                               <div class="form-group">
                                 <input type="text" class="form-control" name="UserName"  id="user_name" placeholder="Enter your name">
@@ -288,10 +288,10 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-6">
-                        <p class="copyright">© Copyright 2016 </p>
+                        <p class="copyright"><a href="http://www.miitbeian.gov.cn"> 浙ICP备16015695 </a></p>
                     </div>
                     <div class="col-sm-6">
-                        <p class="designed">Copyright &copy; 2016.{{msg  . "website_title"}} All rights reserved. </p>
+                        <p class="copyright">Copyright &copy; 2016.{{msg  . "website_title"}} All rights reserved. </p>
                     </div>
                 </div>
             </div>

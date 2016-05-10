@@ -2,14 +2,24 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-module:testrunner
+#module:testrunner
 GET      /index.html                                             App.Index
-GET     /                                                                  App.Index
+GET     /                                                                 App.Index
 GET     /social/sociallist.html                             Social.ShowSocial
 #GET     /social/list.html                                     Social.List
 GET     /getdog                                                      App.GetDog
 POST  /sendmessage                                           App.SendMessage
 GET    /waitinfo.html                                            App.Waitinfo
+#photo
+GET   /photo/photolist.html                                 Photo.ShowPhoto
+GET  /login                                                               Login.Login
+POST /login/signin                                                  Login.SignIn
+GET  /Signout                                                           Login.Signout
+
+GET /sepia                                                                Sepia.ShowSepia
+POST /Sepia/SubmitApp                                         Sepia.Submitapp
+GET /Sepia/:action                                                     Sepia.:action
+
 
 
 # Ignore favicon requests
@@ -17,8 +27,11 @@ GET     /favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
 GET       /social/*filepath                     Static.Serve("public/social")
+GET       /photo/*filepath                     Static.Serve("public/photo")
 GET       /assets/*filepath                     Static.Serve("public/assets")
-#GET     /partner/*filepath                   Static.Serve("public/partner")
+GET      /login/*filepath                   Static.Serve("public/")
+GET      /sepia/*filepath                   Static.Serve("public/")
+
 
 # Catch all
 *       /:controller/:action                    :controller.:action

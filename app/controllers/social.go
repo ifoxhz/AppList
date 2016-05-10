@@ -4,7 +4,7 @@ import (
 //	"golang.org/x/crypto/bcrypt"
 	//"fmt"
 	"github.com/revel/revel"
-	"github.com/ifoxhz/applist/app/models"
+	"github.com/applist/app/models"
 	//"github.com/ifoxhz/ifoxask/app/routes"
 	//"strings"
 )
@@ -14,13 +14,13 @@ type Social struct {
 }
 
 func (c Social) ShowSocial() revel.Result {
-	som := socailorm.SocialMod{}
+	som := model.SocialMod{}
 	som.Init()
 	list, err := som.GetAllApp()
 	if err != nil {
 		revel.WARN.Printf("don't find app list: %s", err)
 	  return c.Redirect(App.Index)
 	}
-		
+
 	return c.Render(list)
 }

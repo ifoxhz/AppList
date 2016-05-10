@@ -1,14 +1,13 @@
-package main
+package controllers
 
 //import "github.com/boombuler/barcode"
 import "github.com/PuerkitoBio/goquery"
+
 import (
 	"fmt"
   "gopkg.in/redis.v3"
-	//"log"
 	"net/url"
 	"os"
-	//"image/png"
 	"bytes"
 	"io"
 	"io/ioutil"
@@ -16,44 +15,72 @@ import (
 	"path/filepath"
 	"reflect"
   "encoding/json"
-   "strconv"
+	//"github.com/applist/app/models"
+	AM "github.com/applist/lib/appmodel"
+	"github.com/revel/revel"
+	"github.com/applist/app/routes"
+	"strconv"
 	// "strings"
 	"crypto/md5"
 )
 
-type AppModel struct {
-  Id         string
-	Name   string
-	Url        string
-	Icon      string
-	QrcodeLoc string
-  Tag           string
-  Category   int
-}
-
-
-var RedisOption =  redis.Options {
-    Addr: "127.0.0.1:6379",
-    Password:"",
-    DB: 0,
-}
-
 const CONTENT_DIV_CLASS_STRING string = "lockup product application"
 const CONTENT_IMG_SRC_STRING string = "src-swap-high-dpi"
 
-const iconlocation string ="/home/yong/go/src/github.com/applist/public/photo/images/icon/"
+type Sepia struct {
+	       *revel.Controller
+}
 
-type Category int
+func (c Sepia) ShowSepia() revel.Result {
+	      c.RenderArgs["indexpage"] = routes.App.Index()
+	      return c.Render()
+}
 
-const  (
-    social Category = iota +100
-    photo
-)
+func (c Sepia) SubmitApp() revel.Result {
+	name := c.Params.Get("app_name")
+	url := c.Params.Get("app_url")
+	cat := c.Params.Get("app_cat")
+	catid,_ := strconv.Atoi(cat)
+  c.RenderArgs["indexpage"] = routes.App.Index()
+	revel.ERROR.Printf("temp: %s", routes.Sepia.ShowSepia())
 
 
+		if  name == "" || url == "" {
+      revel.ERROR.Printf("name or url is wrong")
+			c.Flash.Error("提交的错误的url")
+			return c.Redirect(Sepia.ShowSepia)
+	}
+
+	val,ok := AM.ModeKeyMap[AM.Category(catid)];
+	if  !ok{
+      revel.ERROR.Printf("get wrong category: %s", cat)
+			c.Flash.Error("提交的数据有误")
+				return c.Redirect(Sepia.ShowSepia)
+	}
+	revel.INFO.Printf("submit: %s %s %s", name,url,val)
+	var app AM.AppModel
+	app.Id = fmt.Sprintf("%x" , md5.Sum( []byte(name) ))
+	app.Name = name
+	app.Url = url
+	app.Category = AM.Category(catid)
+
+  err := ExtractIcon(&app)
+	if err != nil{
+		c.Flash.Error("创建App信息失败")
+		return c.Redirect(Sepia.ShowSepia)
+	}
+
+  err = Save(app)
+	if err != nil{
+		c.Flash.Error("创建App信息失败")
+	}else{
+		  c.Flash.Success("submit is success!")
+	}
+	return c.Redirect(Sepia.ShowSepia)
+}
 
 func DownAvatar(tg url.URL, sl string) error {
-	fmt.Println(sl)
+	revel.INFO.Println(sl)
 	out, err := os.Create(sl)
 	if err != nil {
     fmt.Println("---",err)
@@ -62,7 +89,7 @@ func DownAvatar(tg url.URL, sl string) error {
 	defer out.Close()
 	resp, err := HTTP.Get(tg.String())
 	if err != nil {
-		fmt.Println(err)
+		revel.INFO.Println(err)
 		return err
 	}
 	defer resp.Body.Close()
@@ -71,11 +98,11 @@ func DownAvatar(tg url.URL, sl string) error {
 	return err
 }
 
-func ExtractIcon(ap *AppModel) error {
+func ExtractIcon(ap * AM.AppModel) error {
   isfind := false
 	doc, err := goquery.NewDocument(ap.Url)
 	if err != nil {
-		fmt.Println(err)
+		revel.ERROR.Printf("%s", err)
 		return err
 	}
 	doc.Find("div").EachWithBreak(func(i int, s *goquery.Selection) bool {
@@ -91,16 +118,20 @@ func ExtractIcon(ap *AppModel) error {
 			}
 			url, _ := url.Parse(src)
 			if url.IsAbs() {
-				fmt.Printf("abs %d: %s - \n", i, url)
+				revel.INFO.Printf("abs url: %s - \n",  url)
 			} else {
 				x, _ := url.Parse(ap.Url)
 				url.Host = x.Host
 				url.Scheme = x.Scheme
-				fmt.Printf("not abs %d: %s - \n", i, url)
+					revel.INFO.Printf("not abs url: %s - \n",  url)
 			}
+		  var	iconlocation = AM.GetIconLocation(ap.Category)
 			_, file := filepath.Split(url.Path)
-			err = DownAvatar(*url, iconlocation + ap.Id + file) //down icon
-      ap.Icon =  iconlocation + ap.Id + file  //keep icon location
+			err = DownAvatar(*url,  revel.BasePath + "/" +iconlocation + ap.Id + file) //down icon
+      if err != nil {
+				return false
+			}
+		  ap.Icon =  iconlocation + ap.Id + file  //keep icon location
       isfind = true
 			return false
 		})
@@ -111,17 +142,16 @@ func ExtractIcon(ap *AppModel) error {
   }else {
       return err
   }
-
 }
 
 func debugObj(obj interface{}) {
 	ov := reflect.ValueOf(obj)
 	var vref reflect.Value
 	if ov.Kind() != reflect.Struct && ov.Kind() != reflect.Interface && ov.Kind() != reflect.Ptr {
-		fmt.Printf("it is not struct or interface , is %s \n", ov.Kind())
+		revel.INFO.Printf("it is not struct or interface , is %s \n", ov.Kind())
 		return
 	}
-	fmt.Printf("Obj: %s, Type:%s \n", ov.Type(), ov.Kind())
+	revel.INFO.Printf("Obj: %s, Type:%s \n", ov.Type(), ov.Kind())
 	if ov.Kind() == reflect.Struct {
 		vref = ov
 	} else {
@@ -130,54 +160,28 @@ func debugObj(obj interface{}) {
 	typeOfType := vref.Type()
 	for i := 0; i < vref.NumField(); i++ {
 		field := vref.Field(i)
-		fmt.Printf("%d. %s %s  method: %v \n", i, typeOfType.Field(i).Name, field.Type(), field.String())
+		revel.INFO.Printf("%d. %s %s  method: %v \n", i, typeOfType.Field(i).Name, field.Type(), field.String())
 	}
 
-	fmt.Printf("method: %d  \n", typeOfType.NumMethod())
+	revel.INFO.Printf("method: %d  \n", typeOfType.NumMethod())
 	for i := 0; i < typeOfType.NumMethod(); i++ {
 		mt := typeOfType.Method(i)
-		fmt.Printf("%d  method: %v \n", i, mt)
+		revel.INFO.Printf("%d  method: %v \n", i, mt)
 	}
 
 }
 
-const  APP_MODE_PHOTO_KEY = "APP:PHOTO"
-
-func Save(app AppModel) error {
+func Save(app AM.AppModel) error {
   jsob, err := json.Marshal(app)
   if err != nil {
-       fmt.Println("error:", err)
+       revel.ERROR.Printf("error:", err)
        return err
   }
   rdc := redis.NewClient(&RedisOption)
 
-  if err := rdc.HSet(APP_MODE_PHOTO_KEY, app.Id, string(jsob)).Err(); err != nil {
-         panic(err)
+  if err := rdc.HSet(AM.ModeKeyMap[app.Category], app.Id, string(jsob)).Err(); err != nil {
+          revel.ERROR.Print("error:", err)
+					return err
   }
   return nil
-}
-
-
-
-
-
-func main() {
-
-   cat ,_ := strconv.Atoi(os.Args[2])
-  //fmt.Println("%s", os.Args[1])
-	//ul := `https://itunes.apple.com/cn/app/id416048305?mt=8`
-	app := AppModel{
-		Name: os.Args[1],
-		Url:  os.Args[3],
-    Category: cat,
-	}
-
-  app.Id = fmt.Sprintf("%x" , md5.Sum( []byte(app.Name) ))
-  fmt.Println(app, social)
-	err := ExtractIcon(&app)
-  if err != nil {
-    panic(err)
-    return
-  }
-  Save(app)
 }

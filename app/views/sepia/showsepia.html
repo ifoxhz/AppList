@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+
+<html class="no-js"> <!--<![endif]-->
+    <head>
+        <title>iothill</title>
+
+        <!-- meta -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+        <!-- stylesheets -->
+        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/font_icon/css/pe-icon-7-stroke.css">
+        <link rel="stylesheet" href="assets/font_icon/css/helper.css">
+        <link rel="stylesheet" href="assets/css/owl.carousel.css">
+        <link rel="stylesheet" href="assets/css/owl.theme.css">
+        <link rel="stylesheet" href="assets/css/animate.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+
+        <!-- google fonts -->
+        <!--<link href='http://fonts.useso.com/css?family=Dosis:200,300,400,500|Lato:300,400,700,900,300italic,400italic,700italic,900italic|Raleway:400,200,300,500,100|Titillium+Web:400,200,300italic,300,200italic' rel='stylesheet' type='text/css'>-->
+
+        <script src="assets/js/modernizr.js"></script>
+
+    </head>
+    <body id="body">
+
+        <!--[if lt IE 7]>
+                <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <!-- Header area
+        <header id="header">
+            <div class="center text-center">
+                <h1 class="bigheadline">优秀App推荐</h1>
+                <h4 class="subheadline">The Worst Front End Developer</h4>
+            </div>
+            <div class="bottom">
+                <a data-scroll href="#navigation" class="scrollDown animated pulse" id="scrollToContent"><i class="pe-7s-angle-down-circle pe-va"></i></a>
+            </div>
+        </header> -->
+
+        <!-- Navigation area -->
+        <section id="navigation">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-6">
+                          <div class="logo"><a data-scroll href="{{.indexpage}}" class="logo-text">{{msg  . "website_title"}}</a></div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="nav">
+                            <a href="#" data-placement="bottom" title="Menu" class="menu" data-toggle="dropdown"><i class="pe-7s-menu"></i></a>
+                             <div class="dropdown-menu">
+                                 <div class="arrow-up"></div>
+                                 <ul>
+                                     <li><a data-scroll href="#body">主页 <i class="pe-7s-home"></i></a><span class="menu-effect"></span></li>
+                                     <li><a data-scroll href="#services">精选 <i class="pe-7s-config"></i></a><span class="menu-effect"></span></li>
+                                     <li><a data-scroll href="#portfolio">推荐 <i class="pe-7s-glasses"></i></a><span class="menu-effect"></span></li>
+                                     <li><a data-scroll href="#testimonial">Team <i class="pe-7s-comment"></i><span class="menu-effect"></span></a></li>
+                                     <li><a data-scroll href="#contact">Contact <i class="pe-7s-help1"></i></a><span class="menu-effect"></span></li>
+                                 </ul>
+                             </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>  <!-- Content Area -->
+        <div class="copyrights">Collect from <a href="http://www.ifoxask.com/" >App 分类</a></div>
+
+        <!-- services section -->
+        </div>
+        </div><!-- container -->
+        </section><!-- portfolio -->
+        <section id="contact" class="mapWrap"  >
+            <div id="googleMap" style="width:100%;"></div>
+            <div id="contact-area">
+                <div class="container">
+                    <h2 class="block_title">关于{{msg . "website_title"}}</h2>
+                    <div class="row">
+                        <div class="col-xs-12">
+                        </div>
+                        <!--<div class="col-sm-6">
+                            <div class="moreDetails">
+                                <strong >关于我们</strong>
+                                <p> {{msg . "website_title"}} 致力于ios App的推荐  </p>
+                                <ul class="address">
+                                    <li><i class="pe-7s-map-marker"></i><span>杭州源越大厦</span></li>
+                                    <li><i class="pe-7s-mail"></i><span>business@iothill.com</span></li>
+                                    <li><i class="pe-7s-phone"></i><span></span></li>
+                                    <li><i class="pe-7s-global"></i><span><a href="#">www.iothill.com</a></span></li>
+                                </ul>
+                            </div>
+                        </div> -->
+                        <div class="col-sm-6"  style="margin-right:auto;text-align: center;">
+                            <h2 class="con-title" style="margin-left:auto; margin-right:auto">App 信息</h2>
+                            <form  id = "submitapp" role="form" method="post" action=" {{url   "Sepia.SubmitApp" }} ">
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="app_name"  id="app_name" placeholder="App 名字">
+                              </div>
+                              <div class="form-group">
+                                <input type="text"  name="app_url" class="form-control" id="app_url" placeholder="网页地址">
+                              </div>
+                              <div class="form-group">
+                                <select class="form-control" name="app_cat">
+                                              <option value="100">社交</option>
+                                    <option value="101">摄影</option>
+                                    <option value="103">儿童</option>
+                                    <option value="104">旅行</option>
+                                  </select>
+                              </div>
+
+                              <button type="submit" class="btn medium" form="submitapp">Let us know</button>
+                            </form>
+                        </div>
+                        <div class="col-sm-6">
+                          <div class="container">
+  <div class="row">
+    <div class="col-sm-6">
+      {{template "flash.html" .}}
+    </div>
+  </div>
+</div>
+
+                            <div class="moreDetails">
+                                <p>提交  </p>
+
+                                    <li><span>杭州源越大厦</span></li>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div><!-- container -->
+            </div><!-- contact-area -->
+            <div id="social">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <ul class="scoialinks">
+                                <li class="normal-txt">Find me on</li>
+                                <li class="social-icons"><a class="facebook" href="#"></a></li>
+                                <li class="social-icons"><a class="twitter" href="#"></a></li>
+                                <li class="social-icons"><a class="linkedin" href="#"></a></li>
+                                <li class="social-icons"><a class="weibo" href="#"></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- social -->
+        </section><!-- contact -->
+
+        <!-- Footer Area -->
+
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="copyright">© Copyright 2016 </p>
+                    </div>
+                    <div class="col-sm-6">
+                        <p class="designed">Copyright &copy; 2016.{{msg  . "website_title"}} All rights reserved. </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+        <!-- Necessery scripts -->
+        <script src="assets/js/jquery-2.1.3.min.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <!--<script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script> -->
+        <script src="assets/js/jquery.actual.min.js"></script>
+        <script src="assets/js/smooth-scroll.js"></script>
+        <script src="assets/js/owl.carousel.js"></script>
+        <script src="assets/js/script.js"></script>
+
+    </body>
+</html>

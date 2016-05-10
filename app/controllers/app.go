@@ -25,11 +25,11 @@ func (c App) Index() revel.Result {
 		}
 
    if err := Rdb.Incr("IOTHILL.PAGEVIEW").Err(); err != nil {
-    revel.INFO.Printf("failed to conneted redis ", err)
+    revel.ERROR.Printf("failed to conneted redis ", err)
    }
 	//local := c.RenderArgs["controllerCurrentLocale"]
 	//title := revel.Message(c.Request.Locale  , "website_title")
-	//revel.INFO.Printf("local %s  : %s  ", revel.MessageLanguages(), title)
+	//revel.INFO.Printf("local %s  : %s  ", revel.MessageLanguages(),  revel.BasePath)
 	return c.Render()
 }
 
